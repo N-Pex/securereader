@@ -1,0 +1,32 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+	
+    
+    <!-- Story Items (short) as shown in the news feed -->
+    <!--                                               -->
+    <!--                                               -->
+
+    <style name="StoryItemShortTitleStyle">
+        <item name="android:textColor">@color/grey_dark_dark</item>
+        <item name="android:textSize">34sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="font">Glegoo-Regular</item>
+        <item name="android:lineSpacingMultiplier">1.2</item>
+    </style>
+	
+    <!-- Story Items (full screen) -->
+    <!--                                               -->
+    <!--                                               -->
+
+    <style name="StoryItemTitleStyle" parent="StoryItemShortTitleStyle">
+    </style>
+ 
+    <style name="StoryItemContentStyle">
+        <item name="android:textColor">@color/grey_dark_dark</item>
+        <item name="android:textSize">22sp</item>
+        <item name="font">Lucida Grande</item>
+        <item name="android:lineSpacingMultiplier">1.5</item>
+    </style>
+    
+		
+</resources>
