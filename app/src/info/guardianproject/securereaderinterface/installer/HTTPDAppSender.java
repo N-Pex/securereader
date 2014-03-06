@@ -21,6 +21,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import android.annotation.SuppressLint;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -30,9 +31,18 @@ import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.nfc.NdefMessage;
+import android.nfc.NdefRecord;
+import android.nfc.NfcAdapter;
+import android.nfc.NfcAdapter.CreateNdefMessageCallback;
+import android.nfc.NfcAdapter.OnNdefPushCompleteCallback;
+import android.nfc.NfcEvent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import info.guardianproject.securereaderinterface.FragmentActivityWithMenu;
@@ -76,6 +86,7 @@ public class HTTPDAppSender extends FragmentActivityWithMenu
 	private TextView textView;
 	private MyHTTPD server;
 
+	@SuppressLint("NewApi")
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
@@ -94,6 +105,32 @@ public class HTTPDAppSender extends FragmentActivityWithMenu
 
 		setMenuIdentifier(R.menu.activity_httpd_app_sender);
 		setActionBarTitle(getString(R.string.title_activity_httpd_app_sender));
+		
+		if (Build.VERSION.SDK_INT >= 14)
+		{
+			NfcAdapter nfcAdapter = NfcAdapter.getDefaultAdapter(this);
+			if (nfcAdapter != null && nfcAdapter.isEnabled() && nfcAdapter.isNdefPushEnabled())
+			{
+				getWindow().clearFlags(WindowManager.LayoutParams.FLAG_SECURE);
+				nfcAdapter.setNdefPushMessageCallback(new CreateNdefMessageCallback()
+				{
+					@Override
+					public NdefMessage createNdefMessage(NfcEvent event)
+					{
+						NdefMessage ret = null;
+						String s = textView.getText().toString();
+						if (!TextUtils.isEmpty(s))
+						{
+				            ret = new NdefMessage(new NdefRecord[] { 
+				            	NdefRecord.createUri(s) 
+				            });
+						}
+						return ret;
+					}
+					
+				}, this);
+			}
+		}
 	}
 
 	private CharSequence getHtmlTemplate() throws IOException
