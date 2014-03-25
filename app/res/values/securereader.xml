@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<string name="opml_url">http://securereader.guardianproject.info/opml/opml.php</string>
+	
+    <string-array name="built_in_feed_names">
+        <item>Applications</item>
+        <item>EPubs</item>
+    </string-array>
+    
+	<string-array name="built_in_feed_urls">
+        <item>http://securereader.guardianproject.info/swfeed/swfeed.php</item>
+        <item>http://securereader.guardianproject.info/opds/opds.php</item>
+    </string-array>
+
+
+	<!-- FEED_REFRESH_AGE = 300000; // 5 minutes -->
+	<integer name="feed_refresh_age">300000</integer>
+	
+	<!-- OPML_CHECK_FREQUENCY = 43200000; // .5 day -->
+	<integer name="opml_check_frequency">43200000</integer>
+	
+	<!-- EXPIRATION_CHECK_FREQUENCY = 43200000; // .5 days -->
+	<integer name="expiration_check_frequency">43200000</integer>
+
+	<!-- XMLRPC_ENDPOINT -->
+	<string name="xmlrpc_endpoint"></string>
+
+	<!-- Default values that should be referenced in Settings.java -->
+	<bool name="require_tor_default">false</bool>
+			    
+</resources>

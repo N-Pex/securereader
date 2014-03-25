@@ -1,0 +1,2 @@
+package info.guardianproject.securereaderinterface.musicplayer;
+parcelable ParcelableMediaContent;
